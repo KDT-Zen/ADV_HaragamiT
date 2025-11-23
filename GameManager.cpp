@@ -1,0 +1,58 @@
+#include "GameManager.h"
+#include "Scene.h"
+
+//メモ GameManager&は戻値の型
+//GameManager型の参照を返す関数　という意味
+
+GameManager& GameManager::GetInstance() {
+
+	//　GameManagerの唯一のインスタンスを生成・保持
+	static GameManager instance;
+	return instance;
+}
+
+
+void GameManager::GameInit() {}
+
+void GameManager::GameUpdate() {
+switch(currentScene) {
+	case SceneType::TITLE:
+		// タイトルの更新処理
+		break;
+	case SceneType::GAME:
+		// 本編（ADV文章進行）の更新処理
+		break;
+	case SceneType::ENDING:
+		// エンディングの更新処理
+		break;
+	
+	}
+
+}
+
+void GameManager::GameDraw() {
+
+	switch (currentScene) {
+	case SceneType::TITLE:
+		// タイトルの描画処理
+		break;
+	case SceneType::GAME:
+		// 本編（ADV文章進行）の描画処理
+		break;
+	case SceneType::ENDING:
+		// エンディングの描画処理
+		break;
+
+	}
+}
+
+void GameManager::GameEnd() {}
+
+
+// シーン変更
+void GameManager::ChangeScene(SceneType next) {
+	currentScene = next;
+}
+
+
+//　GameManager::Instance().ChangeScene(SceneType::Main);　変える時の書き方の例
