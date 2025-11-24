@@ -33,6 +33,20 @@ private:
 
 	SceneType currentScene = SceneType::TITLE;
 
+	bool prevSpace = false;
+
+	void UpdateTitle();
+
+	void UpdateGame();
+
+	void UpdateEnd();
+
+	void DrawTitle();
+
+	void DrawGame();
+
+	void DrawEnd();
+
 
 
 
