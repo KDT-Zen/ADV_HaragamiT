@@ -82,9 +82,7 @@ void GameManager::ChangeScene(SceneType next) {
 	currentScene = next;
 }
 
-
-//　GameManager::Instance().ChangeScene(SceneType::Main);　変える時の書き方の例
-
+void FadeOut();
 
 
 
@@ -98,14 +96,4 @@ void GameManager::ChangeScene(SceneType next) {
 
 
 
-
-	// タイトルの更新処理
-
-	/*	bool now = (CheckHitKey(KEY_INPUT_SPACE) != 0);
-
-
-		if ((now && !prevSpace))
-		{
-			GameManager::GetInstance().ChangeScene(SceneType::GAME);
-		}*/
 

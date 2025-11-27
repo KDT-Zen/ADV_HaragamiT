@@ -20,6 +20,9 @@ class GameManager {
 
 	void ChangeScene(SceneType next);
 
+	void FadeOut();
+
+
 private:
 
 	//	コンストラクタ・デストラクタをデフォルト化
