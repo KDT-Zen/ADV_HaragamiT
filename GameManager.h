@@ -10,6 +10,17 @@ class GameManager {
 		// シングルトンインスタンス取得　参照で返す
 		static GameManager& GetInstance();
 
+
+		int fadealpha = 0;
+
+		int fadeDir = 0;
+
+		int titleBG;
+
+		int titleLogo;
+
+
+
 	void GameInit();
 
 	void GameUpdate();
@@ -20,7 +31,9 @@ class GameManager {
 
 	void ChangeScene(SceneType next);
 
-	void FadeOut();
+	void updateFade();
+
+	void DrawFade();
 
 
 private:

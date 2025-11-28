@@ -18,8 +18,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		return -1; // 初期化に失敗した場合は終了
 	}
 
-
-
 	// メインループ
 	while (ProcessMessage() == 0) {
 		// 画面をクリア
@@ -31,6 +29,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 		// 画面を更新
 		ScreenFlip();
+
 	}
 
 	// DXライブラリの終了処理
