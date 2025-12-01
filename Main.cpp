@@ -2,12 +2,17 @@
 #include "Game.h"
 #include "GameManager.h"
 #include "GameDefine.h"
+#include "Animation.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	ChangeWindowMode(TRUE);
 
 	SetGraphMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+
+
+
+
 
 	// DXライブラリの初期化
 	if (DxLib_Init() == -1) {
@@ -20,6 +25,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	GameManager::GetInstance().GameInit();
 
+	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
+
 	// メインループ
 	while (ProcessMessage() == 0) {
 		// 画面をクリア
@@ -29,7 +36,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		GameManager::GetInstance().GameUpdate();
 		GameManager::GetInstance().GameDraw();
 		
-	
+
 		// 画面を更新
 		ScreenFlip();
 

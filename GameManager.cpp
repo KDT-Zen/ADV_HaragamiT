@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "DxLib.h"
 #include "GameDefine.h"
+#include "Animation.h"
 
 //メモ GameManager&は戻値の型
 //GameManager型の参照を返す関数　という意味
@@ -16,6 +17,8 @@ GameManager& GameManager::GetInstance() {
 }
 
 void GameManager::UpdateTitle() {
+
+
 
 }
 
@@ -43,6 +46,13 @@ void GameManager::DrawTitle()
 
 	DrawGraph(200, 100, titleLogo, TRUE);
 
+	hibana.Draw(0, 300);
+	
+		
+
+		noize.Draw(0, noiseY);
+	
+
 
 }
 
@@ -54,6 +64,8 @@ void GameManager::DrawEnd() {
 
 }
 
+
+
 void GameManager::GameInit() {
 
 	fader.Init();
@@ -62,7 +74,23 @@ void GameManager::GameInit() {
 
 	titleBG = LoadGraph("data/bg.jpg");
 
+	hibana.Init("titlehibana", 99, 3,3,"delay-0.04s",2.3f);
+
+	noize.Init("titlenoize", 88, 6,2, "delay-0.033333333333333s",6.0f);
+
 	titleLogo = LoadGraph("data/logo.png");
+
+
+
+	titleBGM = LoadSoundMem("data/titlebgm.wav");
+
+
+	PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP);
+
+
+	ChangeVolumeSoundMem(120, titleBGM);  // 1フレームで音量180にする
+	
+
 
 }
 
@@ -70,12 +98,35 @@ void GameManager::GameUpdate() {
 
 	fader.Update();
 
+	hibana.Update();
+
+	noize.Update();
+
 	if (fader.IsFading())return;
 
 	//　各シーンの切り替え
 	switch (currentScene) {
 
 	case SceneType::TITLE:
+		// ノイズ待ち時間を減らす
+		noiseTimer--;
+
+		// 0以下になったら動く
+		if (noiseTimer <= 0)
+		{
+			// ノイズのY位置をランダム量だけ動かす
+			int dy = GetRand(5) + 1;  
+			noiseY += dy;
+
+			// 次に動くまでの待ち時間をランダムに設定
+			noiseTimer = GetRand(8) + 2;  
+
+			//  画面の下まで行ったら上にワープさせる
+			if (noiseY > WINDOW_HEIGHT)
+			{
+				noiseY = -200;  // ノイズが自然に上から降ってくるように見える
+			}
+		}
 
 		GameManager::UpdateTitle();
 	

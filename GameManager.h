@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "FadeManager.h"
+#include "Animation.h"
 
 
 class GameManager {
@@ -19,6 +20,12 @@ class GameManager {
 
 		int titleLogo;
 
+		int titleBGM;
+
+		int noiseY = 0;          // ノイズの描画Y位置
+		int noiseMoveCounter = 0; // ノイズ移動用のカウンタ
+
+		int noiseTimer = 0;
 
 
 	void GameInit();
@@ -35,6 +42,9 @@ class GameManager {
 
 private:
 
+	Animation hibana;
+
+	Animation noize;
 
 	FadeManager fader;
 
