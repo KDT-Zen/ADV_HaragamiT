@@ -70,7 +70,7 @@ void GameManager::GameInit() {
 
 	fader.Init();
 
-	fader.StartFadeIn(2);
+	fader.StartFadeIn(6);
 
 	titleBG = LoadGraph("data/bg.jpg");
 
@@ -88,7 +88,7 @@ void GameManager::GameInit() {
 	PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP);
 
 
-	ChangeVolumeSoundMem(120, titleBGM);  // 1フレームで音量180にする
+	ChangeVolumeSoundMem(90, titleBGM);  // 1フレームで音量180にする
 	
 
 
