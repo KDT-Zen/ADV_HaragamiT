@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+#include "FadeManager.h"
 
 
 class GameManager {
@@ -11,7 +11,7 @@ class GameManager {
 		static GameManager& GetInstance();
 
 
-		int fadealpha = 0;
+		
 
 		int fadeDir = 0;
 
@@ -31,12 +31,12 @@ class GameManager {
 
 	void ChangeScene(SceneType next);
 
-	void updateFade();
-
-	void DrawFade();
 
 
 private:
+
+
+	FadeManager fader;
 
 	//	コンストラクタ・デストラクタをデフォルト化
 	GameManager() = default;
