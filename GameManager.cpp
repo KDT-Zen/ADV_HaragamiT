@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "GameDefine.h"
 #include "Animation.h"
+#include "InputManager.h"
 
 //メモ GameManager&は戻値の型
 //GameManager型の参照を返す関数　という意味
@@ -18,12 +19,31 @@ GameManager& GameManager::GetInstance() {
 
 void GameManager::UpdateTitle() {
 
+	switch (currentTitlePhase) {
 
+	case TitlePhase::PressAny:
+		break;
+
+		case TitlePhase::PressFadeOut:
+			break;
+
+			case TitlePhase::MenuFadein:
+				break;
+
+				case TitlePhase::MenuSelect:
+					break;
+
+
+	}
 
 }
 
 
 void GameManager::UpdateGame() {
+
+
+
+
 
 }
 
@@ -68,39 +88,75 @@ void GameManager::DrawEnd() {
 
 void GameManager::GameInit() {
 
+
+	// フェードの初期化
 	fader.Init();
 
+	// フェードイン開始
 	fader.StartFadeIn(6);
 
-	titleBG = LoadGraph("data/bg.jpg");
 
+	// アニメーションの初期化
 	hibana.Init("titlehibana", 99, 3,3,"delay-0.04s",2.3f);
 
-	noize.Init("titlenoize", 88, 6,2, "delay-0.033333333333333s",6.0f);
+	noize.Init("titlenoize", 88, 2,2, "delay-0.033333333333333s",6.0f);
 
+	// タイトルロゴ画像の読み込み
 	titleLogo = LoadGraph("data/logo.png");
 
-
-
+	// タイトルBGMの読み込みと再生
 	titleBGM = LoadSoundMem("data/titlebgm.wav");
 
+	// タイトル背景画像の読み込み
+	titleBG = LoadGraph("data/bg.jpg");
 
+	// タイトルメニュー画像の読み込み
+
+	PressAnyButton = LoadGraph("data/pressanybutton.png");
+
+	NewGame = LoadGraph("data/newgame.png");
+
+	Option = LoadGraph("data/option.png");
+
+	Exit = LoadGraph("data/exit.png");
+
+	TestPlay = LoadGraph("data/testplay.png");
+
+
+
+
+
+
+
+	// タイトルBGMの再生
 	PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP);
 
 
 	ChangeVolumeSoundMem(90, titleBGM);  // 1フレームで音量180にする
 	
+	//　タイトルメニュー画像の透明度変数
+
+	pressAlpha = 255.0f;
+
+	menualpha = 0.0f;
+
 
 
 }
 
 void GameManager::GameUpdate() {
 
+	// フェードの更新
 	fader.Update();
 
+	// アニメーションの更新
 	hibana.Update();
 
+	// ノイズアニメーションの更新
 	noize.Update();
+
+	// 入力の更新
+	InputManager::GetInstance().Update();
 
 	if (fader.IsFading())return;
 
